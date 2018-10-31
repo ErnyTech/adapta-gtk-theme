@@ -1,0 +1,47 @@
+name: adapta-gtk-theme
+version: '0.1'
+architectures:
+  - all
+summary: "Adapta GTK Theme"
+description: |
+  An adaptive Gtk+ theme based on Material Design Guidelines.
+  
+grade: stable
+confinement: strict
+
+slots:
+  adapta-gtk-theme:
+    interface: content
+    source:
+      read:
+        - $SNAP/share/themes/Adapta
+        - $SNAP/share/themes/Adapta-Eta
+        - $SNAP/share/themes/Adapta-Nokto
+        - $SNAP/share/themes/Adapta-Nokto-Eta
+        
+parts:
+  adapta-gtk-theme:
+    plugin: autotools
+    source: .
+    configflags:
+      - --enable-parallel
+      - --disable-gnome
+      - --disable-cinnamon 
+      - --disable-flashback 
+      - --disable-xfce 
+      - --disable-mate  
+      - --disable-mate  
+    build-packages:
+      - inkscape
+      - libgtk-3-dev
+      - libglib2.0-dev
+      - optipng
+      - libxml2-dev
+      - parallel
+      - sassc
+    override-build: |
+      rm -f autogen.sh
+      snapcraftctl build
+    stage:
+      - share/themes/*/gtk-2.0
+      - share/themes/*/gtk-3.*
