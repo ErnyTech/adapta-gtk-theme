@@ -1,4 +1,4 @@
-name: adapta-gtk-theme
+name: adapta-theme
 version: '0.1'
 architectures:
   - all
